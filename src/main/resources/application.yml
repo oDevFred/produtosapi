@@ -1,13 +1,55 @@
-spring: # Bloco raiz de configurações relacionadas ao Spring
+# ========================================
+# CONFIGURAÇÕES DA APLICAÇÃO SPRING BOOT
+# ========================================
+
+spring: # Bloco raiz de configurações relacionadas ao Spring Framework
+  # -------------------------------------
+  # IDENTIFICAÇÃO DA APLICAÇÃO
+  # -------------------------------------
   application: # Configurações gerais da aplicação
-    name: Produtos API # Definindo nome para a aplicação (útil para logs, monitoramento e service discovery).
-  datasource: # Configurações da fonte de dados (banco de dados)
-    url: jdbc:h2:mem:produtos # Definindo a URL de conexão. 'jdbc:h2:mem' indica que será um banco de dados H2 rodando APENAS na memória (os dados serão perdidos ao reiniciar). 'produtos' é o nome do banco.
-    username: sa # Definindo o nome de usuário para o banco (usuário padrão para H2).
-    password: admin # Definindo a senha para o banco.
-  jpa: # Configurações do JPA (Java Persistence API) e Hibernate
-    database-platform: org.hibernate.dialect.H2Dialect # Definindo qual dialeto do Hibernate usar, garantindo que o SQL gerado seja compatível com o H2.
-  h2: # Configurações específicas para o banco de dados H2
+    name: Produtos API # Define o nome da aplicação (útil para logs, monitoramento, service discovery e tracing distribuído)
+
+  # -------------------------------------
+  # CONFIGURAÇÃO DO BANCO DE DADOS
+  # -------------------------------------
+  datasource: # Configurações da fonte de dados (conexão com banco de dados)
+    # URL de conexão JDBC para banco H2 em memória
+    # jdbc:h2:mem: = banco H2 rodando APENAS na memória RAM (dados perdidos ao reiniciar)
+    # produtos = nome do schema/banco de dados criado
+    # ATENÇÃO: Para ambientes de produção, substituir por banco persistente (PostgreSQL, MySQL, etc)
+    url: jdbc:h2:mem:produtos
+
+    # Credenciais de acesso ao banco H2
+    username: sa # Usuário padrão do H2 (System Administrator)
+    password: admin # Senha definida para o banco (em produção, usar variáveis de ambiente ou secret manager)
+
+  # -------------------------------------
+  # CONFIGURAÇÃO DO JPA/HIBERNATE
+  # -------------------------------------
+  jpa: # Configurações do JPA (Java Persistence API) - camada de abstração para persistência
+    # Define o dialeto SQL específico do banco H2
+    # Garante que o Hibernate gere SQL otimizado e compatível com as funcionalidades do H2
+    # Cada banco (PostgreSQL, MySQL, Oracle) tem seu próprio dialeto
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  # -------------------------------------
+  # CONSOLE WEB DO H2 (APENAS DESENVOLVIMENTO)
+  # -------------------------------------
+  h2: # Configurações específicas do banco de dados H2
     console:
-      enabled: true # Habilitando o console web do H2, uma interface gráfica para acessar o banco de dados via browser.
-      path: /h2-console # Definindo a rota (endpoint) para acessar o console do H2 (e.g., http://localhost:[PORTA]/h2-console).
+      # Habilita interface web para gerenciar o banco de dados
+      # IMPORTANTE: Desabilitar em PRODUÇÃO por questões de segurança!
+      enabled: true
+
+      # Define o endpoint para acessar o console web
+      # Acesso via: http://localhost:[PORTA]/h2-console
+      # Usar as credenciais definidas em 'datasource' para fazer login
+      path: /h2-console
+# ========================================
+# NOTAS IMPORTANTES
+# ========================================
+# 1. H2 em memória é ideal para testes e desenvolvimento rápido
+# 2. Dados são perdidos a cada restart da aplicação
+# 3. Para persistência, usar: jdbc:h2:file:./data/produtos
+# 4. Em produção, migrar para PostgreSQL, MySQL ou Oracle
+# 5. Console H2 expõe dados sensíveis - DESABILITAR em ambientes públicos

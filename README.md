@@ -39,6 +39,7 @@ src/main/resources/
 A API oferece os seguintes endpoints:
 
 ### Criar Produto
+
 ```http
 POST /produtos
 Content-Type: application/json
@@ -51,16 +52,19 @@ Content-Type: application/json
 ```
 
 ### Buscar Produto por ID
+
 ```http
 GET /produtos/{id}
 ```
 
 ### Listar Produtos por Nome
+
 ```http
 GET /produtos?nome=Notebook
 ```
 
 ### Atualizar Produto
+
 ```http
 PUT /produtos/{id}
 Content-Type: application/json
@@ -73,6 +77,7 @@ Content-Type: application/json
 ```
 
 ### Deletar Produto
+
 ```http
 DELETE /produtos/{id}
 ```
@@ -80,28 +85,33 @@ DELETE /produtos/{id}
 ## ⚙️ Como Executar
 
 ### Pré-requisitos
+
 - Java 21 ou superior
 - Maven 3.6+
 
 ### Passos
 
 1. Clone o repositório:
+
 ```bash
 git clone https://github.com/oDevFred/produtosapi
 cd produtosapi
 ```
 
 2. Execute o projeto:
+
 ```bash
 ./mvnw spring-boot:run
 ```
 
 Ou no Windows:
+
 ```bash
 mvnw.cmd spring-boot:run
 ```
 
 3. A API estará disponível em:
+
 ```
 http://localhost:8080
 ```
@@ -159,21 +169,25 @@ O projeto utiliza H2, um banco de dados em memória ideal para desenvolvimento e
 ## 🔍 Conceitos Aplicados
 
 ### Arquitetura em Camadas
+
 - **Controller**: Recebe requisições HTTP e retorna respostas
 - **Repository**: Interface de acesso aos dados
 - **Model**: Representa a entidade do domínio
 
 ### Spring Data JPA
+
 - Uso de `JpaRepository` para operações CRUD automáticas
 - Query Methods personalizados (`findByNome`)
 - Mapeamento objeto-relacional com anotações JPA
 
 ### REST API
+
 - Uso de anotações `@RestController`, `@RequestMapping`
 - Verbos HTTP adequados (GET, POST, PUT, DELETE)
 - `@PathVariable` e `@RequestParam` para parâmetros
 
 ### Boas Práticas
+
 - Injeção de dependência via construtor
 - Uso de UUID para IDs únicos
 - Configuração externalizada em `application.yml`
@@ -182,6 +196,7 @@ O projeto utiliza H2, um banco de dados em memória ideal para desenvolvimento e
 ## 📚 Recursos de Aprendizado
 
 Este projeto foi desenvolvido seguindo o curso:
+
 - **Curso**: [Profissionalize-se em Java com Spring Boot](https://www.udemy.com/course/spring-boot-expert)
 - **Plataforma**: Udemy
 - **Nível**: Iniciante ao Avançado
