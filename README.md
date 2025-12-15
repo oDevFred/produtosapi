@@ -87,7 +87,7 @@ DELETE /produtos/{id}
 
 1. Clone o repositório:
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/oDevFred/produtosapi
 cd produtosapi
 ```
 
